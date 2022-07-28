@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:indexapp/pages/create_account.dart';
+import 'package:indexapp/pages/home_page.dart';
 import 'package:indexapp/pages/main_login_signup_page.dart';
+import 'package:indexapp/util/route.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,8 +15,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(fontFamily: 'RobotoMono'),
-      home: LoginSignuppage(),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        fontFamily: 'RobotoMono',
+        primaryColor: Color.fromARGB(255, 80, 109, 255)
+        ),
+      initialRoute: MyRoute.LoginRoute,
+      routes: {
+        MyRoute.CreateAccountRoute:(context) => CreateAccount(),
+        MyRoute.HomePageRoute:(context) => HomePage(),
+        MyRoute.LoginRoute:(context) => LoginSignuppage()
+      },
     );
   }
 }
