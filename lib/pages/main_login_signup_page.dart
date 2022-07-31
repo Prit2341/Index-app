@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:indexapp/firebase_auth/google_sign_in.dart';
@@ -13,6 +14,10 @@ class LoginSignuppage extends StatefulWidget {
 
 class _LoginSignuppageState extends State<LoginSignuppage> {
   final _formkey = GlobalKey<FormState>();
+  final _auth = FirebaseAuth.instance;
+  late String email;
+  late String password;
+  bool showSpinner = false;
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -50,6 +55,9 @@ class _LoginSignuppageState extends State<LoginSignuppage> {
                   ConstrainedBox(
                     constraints: const BoxConstraints.tightFor(width: 325),
                     child: TextFormField(
+                      onChanged: (value) {
+                        email = value;
+                      },
                       validator: (value) {
                         if (value!.isEmpty) {
                           return "Username cannot be empty";
@@ -78,6 +86,9 @@ class _LoginSignuppageState extends State<LoginSignuppage> {
                   ConstrainedBox(
                     constraints: const BoxConstraints.tightFor(width: 325),
                     child: TextFormField(
+                      onChanged: (value) {
+                        password = value;
+                      },
                       validator: (value) {
                         if(value!.isEmpty) {
                           return "Password Cannot be Empty";
@@ -111,9 +122,23 @@ class _LoginSignuppageState extends State<LoginSignuppage> {
                     color: Color.fromARGB(255, 80, 109, 255),
                     borderRadius: BorderRadius.circular(25),
                     child: MaterialButton(
-                      onPressed: () {
+                      onPressed: () async{
                         if(_formkey.currentState!.validate()){
-                          Navigator.pushNamed(context, MyRoute.HomePageRoute);
+                          setState(() {
+                      showSpinner = true;
+                    });
+                    try {
+                      final user = await _auth.signInWithEmailAndPassword(
+                          email: email, password: password);
+                      if (user != null) {
+                        Navigator.pushNamed(context, MyRoute.HomePageRoute);
+                      }
+                    } catch (e) {
+                      print(e);
+                    }
+                    setState(() {
+                      showSpinner = false;
+                    });
                         }
                       },
                       child: Container(
