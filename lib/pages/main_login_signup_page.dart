@@ -1,8 +1,8 @@
-import 'dart:ffi';
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:indexapp/firebase_auth/google_sign_in.dart';
 import 'package:indexapp/util/route.dart';
+import 'package:provider/provider.dart';
 
 class LoginSignuppage extends StatefulWidget {
    const LoginSignuppage({Key? key}) : super(key: key);
@@ -153,7 +153,8 @@ class _LoginSignuppageState extends State<LoginSignuppage> {
                     borderRadius: BorderRadius.circular(25),
                     child: MaterialButton(
                       onPressed: () {
-                        
+                        final provider = Provider.of<GoogleSignInProvider>(context,listen: false);
+                        provider.googlelogin();
                       },
                       child: Container(
                         alignment: Alignment.center,

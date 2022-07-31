@@ -1,4 +1,4 @@
-package com.example.indexapp
+package com.example.landstation
 
 import io.flutter.embedding.android.FlutterActivity
 

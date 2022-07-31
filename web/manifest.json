@@ -1,6 +1,6 @@
 {
-    "name": "indexapp",
-    "short_name": "indexapp",
+    "name": "landstation",
+    "short_name": "landstation",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

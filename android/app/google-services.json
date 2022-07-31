@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "940841636396",
+    "project_id": "index-app-93cca",
+    "storage_bucket": "index-app-93cca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:940841636396:android:1610d9ff68a976e727f789",
+        "android_client_info": {
+          "package_name": "com.example.landstation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "940841636396-h61n13iptus3dnug3bg5mse4bluo2rod.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIoHvaZ9_Vk63roQE3UUs16wlgh0Dbldo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "940841636396-h61n13iptus3dnug3bg5mse4bluo2rod.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
