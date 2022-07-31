@@ -65,7 +65,7 @@ class _LoginSignuppageState extends State<LoginSignuppage> {
                         return null;
                       },
                       decoration: InputDecoration(
-                        prefixIcon:Icon(Icons.person),
+                        prefixIcon:Icon(Icons.mail),
                         border: OutlineInputBorder(),
                         enabledBorder: OutlineInputBorder(
                           borderSide: const BorderSide(width: 3,color: Color.fromARGB(255, 80, 109, 255)),
@@ -75,8 +75,8 @@ class _LoginSignuppageState extends State<LoginSignuppage> {
                           borderSide: const BorderSide(width: 3,color: Color.fromARGB(255, 80, 109, 255)),
                           borderRadius: BorderRadius.circular(15)
                         ),
-                        labelText: "Username",
-                        hintText: "Enter UserName",
+                        labelText: "Email",
+                        hintText: "Enter Email",
                         hoverColor: Colors.blue
                       ),
                       
