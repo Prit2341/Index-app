@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:indexapp/firebase_auth/google_sign_in.dart';
 import 'package:indexapp/pages/auth_page.dart';
 import 'package:indexapp/pages/create_account.dart';
+import 'package:indexapp/pages/create_account_auth_page.dart';
 import 'package:indexapp/pages/home_page.dart';
 import 'package:indexapp/pages/main_login_signup_page.dart';
 import 'package:indexapp/util/route.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,14 +24,14 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => GoogleSignInProvider(),
       child: MaterialApp(
-        debugShowCheckedModeBanner: false,
+        //debugShowCheckedModeBanner: false,
         theme: ThemeData(
           // fontFamily: 'RobotoMono',
           primaryColor: Color.fromARGB(255, 80, 109, 255)
           ),
         initialRoute: MyRoute.CreateAccountRoute,
         routes: {
-          MyRoute.CreateAccountRoute:(context) => CreateAccount(),
+          MyRoute.CreateAccountRoute:(context) => CreateUserAuthPage(),
           MyRoute.HomePageRoute:(context) => HomePage(),
           MyRoute.LoginRoute:(context) => AuthPage()
         },
