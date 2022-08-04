@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:indexapp/firebase_auth/google_sign_in.dart';
-import 'package:indexapp/pages/auth_page.dart';
+import 'package:indexapp/firebase_auth/auth_page.dart';
 import 'package:indexapp/pages/create_account.dart';
-import 'package:indexapp/pages/create_account_auth_page.dart';
+import 'package:indexapp/firebase_auth/create_account_auth_page.dart';
 import 'package:indexapp/pages/home_page.dart';
 import 'package:indexapp/pages/main_login_signup_page.dart';
 import 'package:indexapp/util/route.dart';
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
           // fontFamily: 'RobotoMono',
           primaryColor: Color.fromARGB(255, 80, 109, 255)
           ),
-        initialRoute: MyRoute.CreateAccountRoute,
+        initialRoute: MyRoute.HomePageRoute,
         routes: {
           MyRoute.CreateAccountRoute:(context) => CreateUserAuthPage(),
           MyRoute.HomePageRoute:(context) => HomePage(),
