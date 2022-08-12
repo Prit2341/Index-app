@@ -16,6 +16,12 @@ class _MainScreenState extends State<MainScreen> {
         centerTitle: true,
         backgroundColor: Color.fromARGB(255, 80, 109, 255),
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {},
+        icon: Icon(Icons.add),
+        label: Text("Add"),
+        backgroundColor: Color.fromARGB(255, 80, 109, 255),
+      ),
     );
   }
 }

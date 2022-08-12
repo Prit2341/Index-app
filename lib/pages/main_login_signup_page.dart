@@ -221,9 +221,7 @@ class _LoginSignuppageState extends State<LoginSignuppage> {
                           color: Color.fromARGB(255, 80, 109, 255)
                         ),
                         recognizer: TapGestureRecognizer()..onTap = () {
-                          if(_formkey.currentState!.validate()){
                           Navigator.pushNamed(context, MyRoute.CreateAccountRoute);
-                        }
                         }
                       )
                     )

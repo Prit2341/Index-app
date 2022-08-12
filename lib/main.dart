@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
           // fontFamily: 'RobotoMono',
           primaryColor: Color.fromARGB(255, 80, 109, 255)
           ),
-        initialRoute: MyRoute.HomePageRoute,
+        initialRoute: MyRoute.LoginRoute,
         routes: {
           MyRoute.CreateAccountRoute:(context) => CreateUserAuthPage(),
           MyRoute.HomePageRoute:(context) => HomePage(),
