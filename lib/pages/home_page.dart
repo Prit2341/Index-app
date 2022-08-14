@@ -4,7 +4,10 @@ import 'package:circle_bottom_navigation_bar/widgets/tab_data.dart';
 import 'package:indexapp/pages/add_land.dart';
 import 'package:indexapp/pages/main_screen.dart';
 import 'package:indexapp/pages/profile_page.dart';
-
+import 'package:indexapp/pages/treading_page.dart';
+import 'package:indexapp/pages/wallet_page.dart';
+import 'package:indexapp/util/route.dart';
+import 'package:pandabar/pandabar.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -12,77 +15,69 @@ class HomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<HomePage> {
-  int currentPage = 0;
-  final List<Widget> _pages = [
-    MainScreen(),
-    AddingItem(),
-    ProfilePage()
-  ];
+  String page = 'Gray';
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final viewPadding = MediaQuery.of(context).viewPadding;
-    double barHeight;
-    double barHeightWithNotch = 67;
-    double arcHeightWithNotch = 67;
-
-    if (size.height > 700) {
-      barHeight = 70;
-    } else {
-      barHeight = size.height * 0.1;
-    }
-
-    if (viewPadding.bottom > 0) {
-      barHeightWithNotch = (size.height * 0.07) + viewPadding.bottom;
-      arcHeightWithNotch = (size.height * 0.075) + viewPadding.bottom;
-    }
-
     return Scaffold(
+      bottomNavigationBar: PandaBar(
+        backgroundColor: Color.fromARGB(255, 238, 239, 252),
+        buttonColor: Color.fromARGB(255, 80, 109, 255),
+        fabColors: [
+          Color.fromARGB(255, 80, 109, 255),
+          Color.fromARGB(255, 80, 109, 255),
+        ],
+        buttonData: [
+          PandaBarButtonData(
+            id: 'Home',
+            icon: Icons.home,
+            title: 'Home'
+          ),
+          PandaBarButtonData(
+            id: 'Search',
+            icon: Icons.search_rounded,
+            title: 'Serach'
+          ),
+          PandaBarButtonData(
+            id: 'wallet',
+            icon: Icons.account_balance,
+            title: 'wallet'
+          ),
+          PandaBarButtonData(
+            id: 'Profile',
+            icon: Icons.person,
+            title: 'Profile'
+          ),
+        ],
+        onChange: (id) {
+          setState(() {
+            page = id;
+          });
+        },
+        onFabButtonPressed: () {
+          Navigator.pushNamed(context, MyRoute.AddPageRoute);
+        },
+      ),
+      body: Builder(
+        builder: (context) {
 
-      body: _pages[currentPage],
-      bottomNavigationBar: CircleBottomNavigationBar(
-        initialSelection: currentPage,
-        barHeight: viewPadding.bottom > 0 ? barHeightWithNotch : barHeight,
-        arcHeight: viewPadding.bottom > 0 ? arcHeightWithNotch : barHeight,
-        itemTextOff: viewPadding.bottom > 0 ? 0 : 1,
-        itemTextOn: viewPadding.bottom > 0 ? 0 : 1,
-        circleOutline: 15.0,
-        shadowAllowance: 0.0,
-        circleSize: 50.0,
-        blurShadowRadius: 50.0,
-        circleColor: Color.fromARGB(255, 80, 109, 255),
-        activeIconColor: Colors.white,
-        inactiveIconColor: Colors.grey,
-        tabs: getTabsData(),
-        onTabChangedListener: (index) => setState(() => currentPage = index),
+          switch (page) {
+            case 'Home':
+              return MainScreen();
+            case 'Search':
+              return TreadingPage();
+            case 'wallet':
+              return WalletPage();
+            case 'Profile':
+              return ProfilePage();
+            default:
+              return MainScreen();
+              
+          }
+
+        },
       ),
     );
-  }
+    }
 }
 
-List<TabData> getTabsData() {
-  return [
-    TabData(
-      icon: Icons.home,
-      iconSize: 25.0,
-      title: 'Home',
-      fontSize: 12,
-      fontWeight: FontWeight.bold,
-    ),
-    TabData(
-      icon: Icons.search,
-      iconSize: 25,
-      title: 'Serach',
-      fontSize: 12,
-      fontWeight: FontWeight.bold,
-    ),
-    TabData(
-      icon: Icons.person,
-      iconSize: 25,
-      title: 'Account',
-      fontSize: 12,
-      fontWeight: FontWeight.bold,
-    ),
-  ];
-}

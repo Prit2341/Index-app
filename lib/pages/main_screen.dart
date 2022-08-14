@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:indexapp/util/route.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -14,12 +15,6 @@ class _MainScreenState extends State<MainScreen> {
       appBar: AppBar(
         title: Text("Home Screen"),
         centerTitle: true,
-        backgroundColor: Color.fromARGB(255, 80, 109, 255),
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
-        icon: Icon(Icons.add),
-        label: Text("Add"),
         backgroundColor: Color.fromARGB(255, 80, 109, 255),
       ),
     );

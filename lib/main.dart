@@ -2,10 +2,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:indexapp/firebase_auth/google_sign_in.dart';
 import 'package:indexapp/firebase_auth/auth_page.dart';
+import 'package:indexapp/pages/add_land.dart';
 import 'package:indexapp/pages/create_account.dart';
 import 'package:indexapp/firebase_auth/create_account_auth_page.dart';
 import 'package:indexapp/pages/home_page.dart';
 import 'package:indexapp/pages/main_login_signup_page.dart';
+import 'package:indexapp/pages/main_screen.dart';
+import 'package:indexapp/pages/profile_page.dart';
 import 'package:indexapp/util/route.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
@@ -33,7 +36,10 @@ class MyApp extends StatelessWidget {
         routes: {
           MyRoute.CreateAccountRoute:(context) => CreateUserAuthPage(),
           MyRoute.HomePageRoute:(context) => HomePage(),
-          MyRoute.LoginRoute:(context) => AuthPage()
+          MyRoute.LoginRoute:(context) => AuthPage(),
+          MyRoute.AddPageRoute:(context) => AddingItem(),
+          MyRoute.ProfilePageRoute:(context) => ProfilePage(),
+          MyRoute.MainPageRoute:(context) => MainScreen()
         },
       ),
     );
