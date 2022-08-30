@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:indexapp/util/card_class.dart';
 import 'package:indexapp/util/route.dart';
 
 class MainScreen extends StatefulWidget {
@@ -16,6 +17,13 @@ class _MainScreenState extends State<MainScreen> {
         title: Text("Home Screen"),
         centerTitle: true,
         backgroundColor: Color.fromARGB(255, 80, 109, 255),
+      ),
+      body: Center(
+        child: Column(
+          children: [
+            Cards()
+          ],
+        ),
       ),
     );
   }
