@@ -8,9 +8,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:indexapp/util/route.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:flutter_document_picker/flutter_document_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'dart:io';
 
-import 'package:indexapp/util/upload_pdf.dart';
 
 
 
@@ -23,6 +24,30 @@ class AddingItem extends StatefulWidget {
 }
 
 class _AddingItemState extends State<AddingItem> {
+  Future<firebase_storage.UploadTask> uploadFile(File file) async {  
+    if (file == null) {
+      print("No File Is Created");
+      return null!;  
+    } 
+
+    firebase_storage.UploadTask uploadTask;  
+    
+    // Create a Reference to the file  
+    firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance  
+    .ref()  
+        .child('files')  
+        .child('/some-file.pdf');  
+    
+    final metadata = firebase_storage.SettableMetadata(  
+        contentType: 'file/pdf',  
+        customMetadata: {'picked-file-path': file.path});  
+    print("Uploading..!");  
+    
+    uploadTask = ref.putData(await file.readAsBytes(), metadata);  
+    
+    print("done..!");  
+    return Future.value(uploadTask);  
+}
   final _formkey = GlobalKey<FormState>();
   final FirebaseAuth auth = FirebaseAuth.instance;
   var size;
@@ -155,8 +180,12 @@ class _AddingItemState extends State<AddingItem> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(18.0),
                             side: BorderSide(color: Colors.black)),
-                        onPressed: () {
-                          UploadPDF();
+                        onPressed: () async{
+                          final path = await FlutterDocumentPicker.openDocument();
+                          print(path);
+                          File file = File(path!);
+                          firebase_storage.UploadTask task = await uploadFile(file);
+                          Navigator.pop(context);
                         },
                         padding: EdgeInsets.all(10.0),
                         color: Colors.white,
