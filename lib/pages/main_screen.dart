@@ -21,7 +21,7 @@ class _MainScreenState extends State<MainScreen> {
       body: Center(
         child: Column(
           children: [
-            Cards()
+            //Cards()
           ],
         ),
       ),

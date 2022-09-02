@@ -6,9 +6,12 @@ import 'package:image_picker/image_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:indexapp/util/route.dart';
+import 'package:iconsax/iconsax.dart';
 import 'dart:io';
 
-import 'package:indexapp/util/route.dart';
+import 'package:indexapp/util/upload_pdf.dart';
+
 
 
 
@@ -28,6 +31,8 @@ class _AddingItemState extends State<AddingItem> {
   late String desc;
   late String area;
   CollectionReference users = FirebaseFirestore.instance.collection('LandData');
+
+  
 
   Future<void> addUser() {
     final User user = auth.currentUser!;
@@ -74,235 +79,115 @@ class _AddingItemState extends State<AddingItem> {
                           backgroundColor: Color.fromARGB(255, 80, 109, 255),
                         ),
                         SizedBox(height: 20.0),
-                        Material(
-                                elevation: 5,
-                                color: Color.fromARGB(255, 209, 209, 209),
-                                borderRadius: BorderRadius.circular(25),
-                                child: MaterialButton(
-                                  onPressed: () async{
-                                    pickImage();
-                                  },
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    height: 150,
-                                    width: 290,
-                                    child: Center(
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Icon(Icons.image),
-                                          SizedBox(height: 20.0),
-                                          Text(
-                                            " Add Images",
-                                            style: TextStyle(
-                                              fontSize: 15,
-                                              //fontWeight: FontWeight.bold,
-                                              color: Colors.black
-                                            ),
-                                            ),
-                                            image!= null ? Image.file(
-                                        image!,
-                                        width: 150,
-                                        height: 290,
-                                        fit: BoxFit.fitHeight,
-                                      ) : Text('')
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                        
-                              ),
-                              SizedBox(height: 30.0),
-                              ConstrainedBox(
-                              constraints: const BoxConstraints.tightFor(width: 325),
-                              child: TextFormField(
-                                onChanged: (value){
-                                  size = value;
-                                },
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return "This Filed cannot be empty";
-                                  }
-                                  return null;
-                                },
-                                decoration: InputDecoration(
-                                  prefixIcon:Icon(Icons.landscape),
-                                  border: OutlineInputBorder(),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(width: 3,color: Color.fromARGB(255, 80, 109, 255)),
-                                    borderRadius: BorderRadius.circular(15)
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(width: 3,color: Color.fromARGB(255, 80, 109, 255)),
-                                    borderRadius: BorderRadius.circular(15)
-                                  ),
-                                  labelText: "Size of the land",
-                                  hintText: "Enter Size in Squre feet",
-                                  hoverColor: Colors.blue
-                                ),
-                                
-                              ),
+                        Container(
+                          decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5), //color of shadow
+                              spreadRadius: 5, //spread radius
+                              blurRadius: 7, // blur radius
+                              offset: Offset(0, 2), // changes position of shadow
+                              //first paramerter of offset is left-right
+                              //second parameter is top to down
                             ),
-                    
-                            SizedBox(height: 20.0),
-                              ConstrainedBox(
-                              constraints: const BoxConstraints.tightFor(width: 325),
-                              child: TextFormField(
-                                onChanged: (value){
-                                  soilQuality = value;
-                                },
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return "Username cannot be empty";
-                                  }
-                                  return null;
-                                },
-                                decoration: InputDecoration(
-                                  prefixIcon:Icon(Icons.high_quality),
-                                  border: OutlineInputBorder(),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(width: 3,color: Color.fromARGB(255, 80, 109, 255)),
-                                    borderRadius: BorderRadius.circular(15)
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(width: 3,color: Color.fromARGB(255, 80, 109, 255)),
-                                    borderRadius: BorderRadius.circular(15)
-                                  ),
-                                  labelText: "Soil Quality of Land",
-                                  hintText: "",
-                                  hoverColor: Colors.blue
-                                ),
-                                
+                          ]
+                        ),
+                          height: 200,
+                          width: 370,
+                          child: Center(
+                            child: Icon(Icons.image),
+                          )
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 16.0,horizontal: 32.0),
+                          child: Column(
+                            children: [
+                              TextFormField(
+                              decoration: const InputDecoration(
+                                prefixIcon: Icon(Iconsax.size5),
+                                hintText: '2900sq',
+                                labelText: 'Size',
                               ),
-                            ),
-                            SizedBox(height: 20.0),
-                              ConstrainedBox(
-                              constraints: const BoxConstraints.tightFor(width: 325),
-                              child: TextFormField(
-                                onChanged: (value) {
-                                  waterlevel = value;
-                                },
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return "Username cannot be empty";
-                                  }
-                                  return null;
-                                },
-                                decoration: InputDecoration(
-                                  prefixIcon:Icon(Icons.water),
-                                  border: OutlineInputBorder(),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(width: 3,color: Color.fromARGB(255, 80, 109, 255)),
-                                    borderRadius: BorderRadius.circular(15)
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(width: 3,color: Color.fromARGB(255, 80, 109, 255)),
-                                    borderRadius: BorderRadius.circular(15)
-                                  ),
-                                  labelText: "Water level of the land",
-                                  hintText: "Enter Size in Squre feet",
-                                  hoverColor: Colors.blue
-                                ),
-                                
+                              onChanged: (value) {
+                                size = value;
+                              },
+                              validator: (value) {
+                                return null;
+                              },
+                      ),
+                      SizedBox(height: 20.0),
+                      TextFormField(
+                              decoration: const InputDecoration(
+                                fillColor: Color.fromARGB(255, 80, 109, 255),
+                                prefixIcon: Icon(Iconsax.level),
+                                hintText: '',
+                                labelText: 'Water Level',
                               ),
-                            ),
-                            SizedBox(height: 20.0),
-                              ConstrainedBox(
-                              constraints: const BoxConstraints.tightFor(width: 325),
-                              child: TextFormField(
-                                onChanged: (value){
-                                  desc = value;
-                                },
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return "Username cannot be empty";
-                                  }
-                                  return null;
-                                },
-                                decoration: InputDecoration(
-                                  prefixIcon:Icon(Icons.source_rounded),
-                                  border: OutlineInputBorder(),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(width: 3,color: Color.fromARGB(255, 80, 109, 255)),
-                                    borderRadius: BorderRadius.circular(15)
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(width: 3,color: Color.fromARGB(255, 80, 109, 255)),
-                                    borderRadius: BorderRadius.circular(15)
-                                  ),
-                                  labelText: "Surrounding of the land",
-                                  hintText: "",
-                                  hoverColor: Colors.blue
-                                ),
-                                
+                              onChanged: (value) {
+                                size = value;
+                              },
+                              validator: (value) {
+                                return null;
+                              },
+                      ),
+                      SizedBox(height: 20.0),
+                      TextFormField(
+                              decoration: const InputDecoration(
+                                fillColor: Color.fromARGB(255, 80, 109, 255),
+                                prefixIcon: Icon(Iconsax.buliding),
+                                hintText: 'Rural/Urban',
+                                labelText: 'Area',
                               ),
-                            ),
-                            SizedBox(height: 20.0),
-                              ConstrainedBox(
-                              constraints: const BoxConstraints.tightFor(width: 325),
-                              child: TextFormField(
-                                onChanged: (value) {
-                                  area = value;
-                                },
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return "Username cannot be empty";
-                                  }
-                                  return null;
-                                },
-                                decoration: InputDecoration(
-                                  prefixIcon:Icon(Icons.business_outlined),
-                                  border: OutlineInputBorder(),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(width: 3,color: Color.fromARGB(255, 80, 109, 255)),
-                                    borderRadius: BorderRadius.circular(15)
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(width: 3,color: Color.fromARGB(255, 80, 109, 255)),
-                                    borderRadius: BorderRadius.circular(15)
-                                  ),
-                                  labelText: "Area of the land",
-                                  hintText: "Rurle/urban",
-                                  hoverColor: Colors.blue
-                                ),
-                                
-                              ),
-                            ),
-                            SizedBox(height: 30.0),
-                            Material(
-                              elevation: 5,
-                              color: Color.fromRGBO(80, 109, 255, 1),
-                              borderRadius: BorderRadius.circular(17),
-                              child: MaterialButton(
-                                onPressed: () {
-                                if(_formkey.currentState!.validate()){
-                                  addUser();
-                                }
-                                },
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  height: 50,
-                                  width: 290,
-                                  child: Center(
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          "Add Land",
-                                          style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black
-                                          ),
-                                          )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                      
-                            ),
+                              onChanged: (value) {
+                                size = value;
+                              },
+                              validator: (value) {
+                                return null;
+                              },
+                      ),
+                      Container(
+                      margin: EdgeInsets.all(20),
+                      height: 50.0,
+                      width: 300.0,
+                      child: RaisedButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18.0),
+                            side: BorderSide(color: Colors.black)),
+                        onPressed: () {
+                          UploadPDF();
+                        },
+                        padding: EdgeInsets.all(10.0),
+                        color: Colors.white,
+                        textColor: Colors.black,
+                        child: Text("Upload File",
+                            style: TextStyle(fontSize: 15)),
+                      ),
+                      ),
+                      SizedBox(height: 30.0),
+                      Container(
+                        margin: EdgeInsets.all(10),
+                        height: 50.0,
+                        width: 390,
+                        child: RaisedButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18.0),
+                              side: BorderSide(color: Color.fromARGB(255, 80, 109, 255))),
+                          onPressed: () {
+                            
+                          },
+                          padding: EdgeInsets.all(10.0),
+                          color: Color.fromARGB(255, 80, 109, 255),
+                          textColor: Colors.white,
+                          child: Text("Add Land",
+                              style: TextStyle(fontSize: 15)),
+                        ),
+                      ),
+
+                            ],
+                          ),
+                        )
                       ],
                     ),
                   ),
