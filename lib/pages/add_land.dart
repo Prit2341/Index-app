@@ -172,8 +172,10 @@ class _AddingItemState extends State<AddingItem> {
                                 return null;
                               },
                       ),
+                      SizedBox(height: 20.0),
+                      Text(""),
                       Container(
-                      margin: EdgeInsets.all(20),
+                      margin: EdgeInsets.all(0),
                       height: 50.0,
                       width: 300.0,
                       child: RaisedButton(
